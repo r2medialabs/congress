@@ -107,7 +107,7 @@ export class CompareMembersService {
         ids.forEach(e => {
             const myhttpOptions = {
                 headers: new HttpHeaders({
-                    'X-API-Key':  'jLo4tPcHFLExBAqXXM88X0P3dkEQEuSYnkZYmFsG'
+                    'X-API-Key':  'API KEY'
                 }),
 
                 params: new HttpParams().set('offset', e.offset.toString())
@@ -185,7 +185,7 @@ export class CompareMembersService {
 
 const httpOptions = {
     headers: new HttpHeaders({
-      'X-API-Key':  'jLo4tPcHFLExBAqXXM88X0P3dkEQEuSYnkZYmFsG'
+      'X-API-Key':  ' API KEY'
     })
 }
 export interface query_int {
