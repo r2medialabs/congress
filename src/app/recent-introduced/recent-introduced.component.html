@@ -1,0 +1,51 @@
+<mat-card class="intro-card">
+  <p>Here you can view 20 of the most recently introduced bills in Congress, both by <b>Senate</b> and <b>House</b>.</p>
+    
+  <p>The <i>Status</i> column shows whether the bill has seen action beyond introduction and committee referral.</p>
+</mat-card>
+
+<div class="recent-introduced-table">
+  <div class="mat-elevation-z8">
+    <div class="table-header">
+      <mat-form-field>
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+      </mat-form-field>
+    </div>
+    
+    <mat-table #table [dataSource]="dataSource" style="margin-bottom: 50px">
+      <ng-container matColumnDef="bill-number">
+        <mat-header-cell *matHeaderCellDef style="width: 100px">Bill Number</mat-header-cell>
+        <mat-cell *matCellDef="let bills" style="width: 100px">{{bills.number}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="sponsor-name">
+        <mat-header-cell *matHeaderCellDef>Sponsor</mat-header-cell>
+        <mat-cell *matCellDef="let bills">{{bills.sponsor_name}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="date">
+        <mat-header-cell *matHeaderCellDef style="text-align:center">Date Introduced</mat-header-cell>
+        <mat-cell *matCellDef="let bills" style="text-align:center">{{bills.introduced_date}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="category">
+        <mat-header-cell *matHeaderCellDef>Category</mat-header-cell>
+        <mat-cell *matCellDef="let bills">{{bills.primary_subject}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="status">
+        <mat-header-cell *matHeaderCellDef style="text-align:center">Status</mat-header-cell>
+        <mat-cell *matCellDef="let bills" style="text-align:center">{{bills.active?'YES':'NO'}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="latest-action">
+        <mat-header-cell *matHeaderCellDef style="width: 300px">Latest Activity</mat-header-cell>
+        <mat-cell *matCellDef="let bills" style="width: 300px">{{bills.latest_major_action}}</mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+  </div>
+</div>
+  

@@ -1,0 +1,50 @@
+<mat-card class="intro-card">
+  <p>Here you can view 20 of the most recently voted bills in Congress, both by <b>Senate</b> and <b>House</b>.</p>
+  
+  <p>Click the <b>Details</b> <button mat-mini-fab color="primary"><mat-icon>more_vert</mat-icon></button> button on the right if you want to view more information about a bill.</p>
+</mat-card>
+
+<div class="recent-votes-table">
+  <div class="mat-elevation-z8">
+    <div class="table-header">
+      <mat-form-field>
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+      </mat-form-field>
+    </div>
+    
+    <mat-table #table [dataSource]="dataSource" style="margin-bottom: 50px">
+      <ng-container matColumnDef="chamber">
+        <mat-header-cell *matHeaderCellDef>Chamber</mat-header-cell>
+        <mat-cell *matCellDef="let votes">{{votes.chamber}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="bill-number">
+        <mat-header-cell *matHeaderCellDef>Bill Number</mat-header-cell>
+        <mat-cell *matCellDef="let votes">{{votes.bill.number}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="vote-type">
+        <mat-header-cell *matHeaderCellDef>Vote Type</mat-header-cell>
+        <mat-cell *matCellDef="let votes">{{votes.vote_type}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="date-time">
+        <mat-header-cell *matHeaderCellDef>Date/Time</mat-header-cell>
+        <mat-cell *matCellDef="let votes">{{votes.date}}<br>{{votes.time}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="result">
+        <mat-header-cell *matHeaderCellDef>Result</mat-header-cell>
+        <mat-cell *matCellDef="let votes">{{votes.result}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="voting-details">
+        <mat-header-cell *matHeaderCellDef>Details</mat-header-cell>
+        <mat-cell *matCellDef="let votes; let row"><button mat-mini-fab (click)="viewDetails(row)" color="primary" style="margin: 5px 5px;"><mat-icon>more_vert</mat-icon></button></mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+  </div>
+</div>

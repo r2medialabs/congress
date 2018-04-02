@@ -1,0 +1,15 @@
+* {
+    font-family: Roboto;
+}
+
+#chart {
+    size: 40%;
+}
+
+.w-100{
+    width: 50% !important;
+}
+
+.h-300p{
+    height: 100px;
+}

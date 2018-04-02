@@ -1,0 +1,66 @@
+<h2 mat-dialog-title>Bill Number: <b>{{selectedBill.bill.number}}</b></h2>
+
+<mat-accordion mat-dialog-content>
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                Bill Information
+            </mat-panel-title>
+            
+            <mat-panel-description>
+                {{selectedBill.bill.latest_action}}
+            </mat-panel-description>
+        </mat-expansion-panel-header>
+        
+        <dl>
+            <dt>Description:</dt>
+                <dd>{{selectedBill.description}}</dd>
+        </dl>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                Voting Details
+            </mat-panel-title>
+            
+            <mat-panel-description>
+                {{selectedBill.result}}
+            </mat-panel-description>
+        </mat-expansion-panel-header>
+        
+        <div fxLayout="row" fxLayoutAlign="space-evenly start">
+            <dl>
+                <dt style="color: red; font-weight: bolder">Democrats:</dt>
+                    <dd>Yes: {{selectedBill.democratic.yes}}</dd>
+                    <dd>No: {{selectedBill.democratic.no}}</dd>
+                    <dd>Abstained: {{selectedBill.democratic.not_voting}}</dd>
+            </dl>
+    
+            <dl>
+                <dt style="color: blue; font-weight: bolder">Republicans:</dt>
+                    <dd>Yes: {{selectedBill.republican.yes}}</dd>
+                    <dd>No: {{selectedBill.republican.no}}</dd>
+                    <dd>Abstained: {{selectedBill.republican.not_voting}}</dd>
+            </dl>
+    
+            <dl>
+                <dt style="color: darkgrey; font-weight: bolder">Independent:</dt>
+                    <dd>Yes: {{selectedBill.independent.yes}}</dd>
+                    <dd>No: {{selectedBill.independent.no}}</dd>
+                    <dd>Abstained: {{selectedBill.independent.not_voting}}</dd>
+            </dl>
+    
+            <dl>
+                <dt style="font-weight: bolder">Total:</dt>
+                    <dd>Yes: {{selectedBill.total.yes}}</dd>
+                    <dd>No: {{selectedBill.total.no}}</dd>
+                    <dd>Abstained: {{selectedBill.total.not_voting}}</dd>
+            </dl>
+        </div>
+    </mat-expansion-panel>
+</mat-accordion>
+
+<div fxLayout="column" fxLayoutAlign="center center">
+    <button mat-raised-button [mat-dialog-close] color="warn">Close</button>
+</div>

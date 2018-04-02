@@ -1,0 +1,70 @@
+<h2 mat-dialog-title [ngStyle]="{'color':getColor(data.roles[0].party)}">{{data.roles[0].short_title}} {{data.first_name}} ({{data.roles[0].state}})</h2>
+
+<mat-accordion mat-dialog-content>
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                Contact Information
+            </mat-panel-title>
+            
+            <mat-panel-description>
+                {{data.roles[0].chamber}}
+            </mat-panel-description>
+        </mat-expansion-panel-header>
+        
+        <dl>
+            <dt>Office Address:</dt>
+                <dd>{{data.roles[0].office}}</dd>
+            <dt>Fax:</dt>
+                <dd>{{data.roles[0].fax}}</dd>
+            <dt>Phone:</dt>
+                <dd>{{data.roles[0].phone}}</dd>
+            <dt>Website:</dt>
+                <dd><a href="{{data.url}}" target="_blank">{{data.url}}</a></dd>
+            <dt>Twitter:</dt>
+                <dd><a href="https://twitter.com/{{data.twitter_account}}" target="_blank">{{data.twitter_account}}</a></dd>
+            <dt>Facebook:</dt>
+                <dd><a href="https://facebook.com/{{data.facebook_account}}" target="_blank">{{data.facebook_account}}</a></dd>
+            <dt>Youtube:</dt>
+                <dd><a href="https://youtube.com/{{data.youtube_account}}" target="_blank">{{data.youtube_account}}</a></dd>
+        </dl>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                Committees
+            </mat-panel-title>
+            
+            <mat-panel-description>
+                Member of {{data.roles[0].committees.length}} Committees
+            </mat-panel-description>
+        </mat-expansion-panel-header>
+        
+        <dl *ngFor="let committee of data.roles[0].committees">
+            <dt>Name: {{committee.name}}</dt>
+                <dd>Role: {{committee.title}}</dd>
+        </dl>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                Subcommittees
+            </mat-panel-title>
+            
+            <mat-panel-description>
+                Member of {{data.roles[0].subcommittees.length}} Subcommittees
+            </mat-panel-description>
+        </mat-expansion-panel-header>
+        
+        <dl *ngFor="let subcommittee of data.roles[0].subcommittees">
+            <dt>Name: {{subcommittee.name}}</dt>
+                <dd>Role: {{subcommittee.title}}</dd>
+        </dl>
+    </mat-expansion-panel>
+</mat-accordion><br>
+
+<div fxLayout="column" fxLayoutAlign="center center">
+    <button mat-raised-button [mat-dialog-close] color="warn">Close</button>
+</div>

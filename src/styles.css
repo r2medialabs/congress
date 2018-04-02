@@ -1,0 +1,56 @@
+/* You can add global styles to this file, and also import other style files */
+/* @import '~@angular/material/prebuilt-themes/deeppurple-amber.css'; */
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+/* @import '~@angular/material/prebuilt-themes/pink-bluegrey.css'; */
+/* @import '~@angular/material/prebuilt-themes/purple-green.css'; */
+
+body {
+    margin: auto;
+}
+
+#toolbar {
+    /* color: whitesmoke;
+    background-color: #9A9A9A; */
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    text-align: center;
+}
+
+#toolbar_title {
+    font-size: 35px;
+    margin: auto;
+}
+
+#loading{
+    width: 50px;
+    height: 50px;
+    border: 5px solid #ccc;
+    border-top-color: #3F51B5;
+    border-radius: 100%;
+
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+
+    animation: round 1s linear infinite;
+}
+
+@keyframes round{
+    from{transform: rotate(0deg)}
+    to{transform: rotate(360deg)}
+}
+
+@media only screen and (max-width: 1920px) {
+    body { width: 1500px; }
+}
+
+@media only screen and (max-width: 1600px) {
+    body { width: 1200px; }
+}
+
+@media only screen and (max-width: 1400px) {
+    body { width: 1000px; }
+}

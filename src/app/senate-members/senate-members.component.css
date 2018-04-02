@@ -1,0 +1,19 @@
+.intro-card {
+    position: relative;
+    width: 80%;
+    margin: auto;
+}
+
+.senate-table {
+    position: relative;
+    width: 80%;
+    margin: auto;
+}
+
+.table-header {
+    margin-left: 25px;
+}
+
+.mat-column-select {
+    overflow: initial;
+}

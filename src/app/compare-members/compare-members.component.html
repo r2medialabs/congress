@@ -1,0 +1,84 @@
+<div fxLayout="row" fxLayoutAlign="space-between start">
+    <div fxLayout="row" fxLayoutAlign="center center">
+        <h3 [ngStyle]="{'color':getColor(firstMember.party)}">{{firstMember.short_title}} {{firstMember.last_name}} ({{firstMember.state}})</h3> <h2>:   VS   :</h2> <h3 [ngStyle]="{'color':getColor(secondMember.party)}">{{secondMember.short_title}} {{secondMember.first_name}} ({{secondMember.state}})</h3>
+    </div>
+    <button mat-mini-fab [mat-dialog-close] color="warn" style="min-width: 1%" (click)="closeDialog()"><mat-icon>close</mat-icon></button>
+</div>
+
+<mat-tab-group mat-dialog-content #tabGroup [selectedIndex]="selectedTab">
+    <mat-tab label="Votes">
+        
+        <mat-card fxLayout="row" fxLayoutAlign="space-evenly center">
+            <mat-card-header fxLayout="column" fxLayoutAlign="center center">
+                <p># of Total Votes: <b>{{data.common_votes}}</b></p>
+                <p># of Agreeing Votes: <b style="color: #378D3B">{{data.common_votes - data.disagree_votes}} ({{data.agree_percent}}%)</b></p>
+                <p># of Disagreeing Votes: <b style="color: #D22E2E">{{data.disagree_votes}} ({{data.disagree_percent}}%)</b></p>
+            </mat-card-header>
+            <mat-card-content fxLayout="column" fxLayoutAlign="center center" style="width: 25%; height: 25%">
+                <ngx-charts-pie-chart
+                    [scheme]="colorScheme"
+                    [results]="single"
+                    [legend]="showLegend"
+                    [explodeSlices]="explodeSlices"
+                    [labels]="showLabels"
+                    [doughnut]="doughnut"
+                    [gradient]="gradient">
+                </ngx-charts-pie-chart>   
+            </mat-card-content>
+        </mat-card><br>        
+    </mat-tab>
+
+    <mat-tab label="Bills" [disabled]="tDisabled">
+        <div *ngIf="sDisabled" fxLayout="column" fxLayoutAlign="start center">
+            <h3>Please wait, processing individual vote data...</h3>
+            <mat-spinner style="margin-top: 15%; margin-bottom: 15%"></mat-spinner>
+        </div>
+
+        <div *ngIf="!sDisabled">
+            <mat-form-field style="margin-top: 5px; margin-bottom: -15px">
+                <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+            </mat-form-field>
+
+            <mat-table #table [dataSource]="dataSource">
+                <ng-container matColumnDef="bill-number">
+                    <mat-header-cell *matHeaderCellDef>Bill Number</mat-header-cell>
+                    <mat-cell *matCellDef="let bill">{{bill.billid}}</mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="first-member-votes">
+                    <mat-header-cell *matHeaderCellDef>{{firstMember.short_title}} {{firstMember.last_name}} ({{firstMember.state}})</mat-header-cell>
+                    <mat-cell *matCellDef="let bill">
+                        Yes: {{bill.m1countYes}},<br>
+                        No: {{bill.m1countNo}},<br>
+                        No Vote: {{bill.m1countNV}}
+                    </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="second-member-votes">
+                    <mat-header-cell *matHeaderCellDef>{{secondMember.short_title}} {{secondMember.first_name}} ({{secondMember.state}})</mat-header-cell>
+                    <mat-cell *matCellDef="let bill">
+                        Yes: {{bill.m2countYes}},<br>
+                        No: {{bill.m2countNo}},<br>
+                        No Vote: {{bill.m2countNV}}
+                    </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="bill-description">
+                    <mat-header-cell *matHeaderCellDef>Short Description</mat-header-cell>
+                    <mat-cell *matCellDef="let bill">
+                        {{bill.description}}
+                    </mat-cell>
+                </ng-container>
+
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+            </mat-table>
+        </div>
+
+        <mat-paginator #paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 20, 50, 100]" [showFirstLastButtons]="true"></mat-paginator>
+    </mat-tab>
+</mat-tab-group><br>
+
+<div fxLayout="row" fxLayoutAlign="center center">
+    <button mat-raised-button color="primary" (click)="showStats()">Show Bills</button>
+</div>

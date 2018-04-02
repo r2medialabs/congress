@@ -1,0 +1,19 @@
+.intro-card {
+    position: relative;
+    width: 80%;
+    margin: auto;
+}
+
+.recent-votes-table {
+    position: relative;
+    width: 80%;
+    margin: auto;
+}
+
+.table-header {
+    margin-left: 25px;
+}
+
+.mat-column-select {
+    overflow: initial;
+}

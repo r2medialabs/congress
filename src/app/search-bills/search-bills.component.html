@@ -1,0 +1,17 @@
+<mat-card class="intro-card">
+  <p>Use the <b>Search</b> bar underneath to search for bills, by their titles or legislation text, using any type of keyword or phrase.</p>
+</mat-card>
+
+<div class="search">
+  <mat-input-container style="margin-top: 5px">
+    <input matInput #searchBox placeholder="Type keyword or phrase"/>
+  </mat-input-container>
+
+  <button mat-raised-button color="primary" (click)="search(searchBox.value)">Search</button>
+
+  <mat-nav-list>
+    <a mat-list-item *ngFor="let bill of bills | async" (click)="viewDetails()">
+      {{bill.results[0].bills[0].number}}
+    </a>
+  </mat-nav-list>
+</div>

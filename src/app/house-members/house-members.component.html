@@ -1,0 +1,84 @@
+<mat-card class="intro-card">
+    <p>Use the <b>Filter</b> bar underneath to search for a specific member by either First Name, Last Name or any of the sections you see below.</p>
+    
+    <p>Click the <b>Details</b> <button mat-mini-fab color="primary"><mat-icon>more_vert</mat-icon></button> button on the right if you want to view more information about a member.</p>
+    
+    <p>Select 2 members and click the <b>Compare</b> <button mat-raised-button color="primary" style="min-width: 1%"><mat-icon>people</mat-icon></button> button to view number of <i>Agreeing</i> and <i>Disagreeing</i> votes.</p>
+</mat-card>
+
+<div class="house-table">
+    <div class="mat-elevation-z8">
+        <div class="table-header">
+            <mat-form-field style="margin-top: 5px">
+                <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+            </mat-form-field>
+        </div>
+
+        <mat-table #table [dataSource]="dataSource" matSort>
+
+            <ng-container matColumnDef="select">
+                <mat-header-cell *matHeaderCellDef style="text-align: center">
+                    <!-- <mat-checkbox (change)="$event ? masterToggle() : null"
+                                [checked]="selection.hasValue() && isAllSelected()"
+                                [indeterminate]="selection.hasValue() && !isAllSelected()"
+                                color="primary">
+                    </mat-checkbox> -->
+                    
+                    <button mat-raised-button color="primary" [disabled]="disabled" (click)="compareMembers()" style="min-width: 1%"><mat-icon>people</mat-icon></button>
+                </mat-header-cell>
+                <mat-cell *matCellDef="let row" style="text-align: center">
+                    <mat-checkbox (click)="$event.stopPropagation()"
+                                (change)="$event ? selection.toggle(row) : null"
+                                [checked]="selection.isSelected(row)"
+                                color="primary">
+                    </mat-checkbox>
+                </mat-cell>
+            </ng-container>
+            
+            <ng-container matColumnDef="title">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Title</mat-header-cell>
+                <mat-cell *matCellDef="let houseMember">{{houseMember.title}}</mat-cell>
+            </ng-container>
+            
+            <ng-container matColumnDef="last-name">
+                <mat-header-cell *matHeaderCellDef style="text-align: center;">L. Name</mat-header-cell>
+                <mat-cell *matCellDef="let houseMember" style="text-align: center;">{{houseMember.last_name}}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="first-name">
+                <mat-header-cell *matHeaderCellDef>F. Name</mat-header-cell>
+                <mat-cell *matCellDef="let houseMember">{{houseMember.first_name | uppercase}}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="state">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>State</mat-header-cell>
+                <mat-cell *matCellDef="let houseMember">{{houseMember.state}}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="next">
+                <mat-header-cell *matHeaderCellDef>Next Election</mat-header-cell>
+                <mat-cell *matCellDef="let houseMember">{{houseMember.next_election}}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="party">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Party</mat-header-cell>
+                <mat-cell *matCellDef="let houseMember">{{houseMember.party}}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="details">
+                <mat-header-cell *matHeaderCellDef>Details</mat-header-cell>
+                <mat-cell *matCellDef="let houseMember; let row"><button mat-mini-fab color="primary" (click)="viewDetails(row)" style="margin: 5px 5px;"><mat-icon>more_vert</mat-icon></button></mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+        </mat-table>
+
+        <div fxLayout="row" fxLayoutAlign="space-between center" style="margin-bottom: 50px">
+            <button mat-raised-button color="primary" (click)="clearSelection()" style="min-width: 1%; margin-left: 5.5%"><mat-icon>clear_all</mat-icon></button>
+
+            <mat-paginator #paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 20, 50, 100]" [showFirstLastButtons]="true"></mat-paginator>
+        </div>
+    </div>
+</div>
